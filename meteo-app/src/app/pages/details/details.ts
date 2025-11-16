@@ -1,0 +1,166 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { WeatherData } from '../../services/weather.service';
+
+@Component({
+  selector: 'app-details',
+  template: `
+    @if (weatherData) {
+      <div class="details-container">
+        <div class="details-header">
+          <button (click)="goBack()" class="back-btn">
+            ← Torna alla Home
+          </button>
+          <h1>📊 Dettagli Meteo Completi</h1>
+        </div>
+
+        <div class="city-header">
+          <h2>{{ weatherData.name }}, {{ weatherData.sys.country }}</h2>
+          <p class="current-time">{{ today | date:'dd/MM/yyyy HH:mm' }}</p>
+        </div>
+
+        <div class="details-grid">
+          <!-- Temperatura -->
+          <div class="detail-card temperature-card">
+            <div class="card-header">
+              <span class="card-icon">🌡️</span>
+              <h3>Temperatura</h3>
+            </div>
+            <div class="temperature-grid">
+              <div class="temp-item current" [style.color]="getTemperatureColor(weatherData.main.temp)">
+                <span class="temp-label">Attuale</span>
+                <span class="temp-value">{{ weatherData.main.temp | number:'1.1-1' }}°C</span>
+              </div>
+              <div class="temp-item feels-like">
+                <span class="temp-label">Percepita</span>
+                <span class="temp-value">{{ weatherData.main.feels_like | number:'1.1-1' }}°C</span>
+              </div>
+              <div class="temp-item min-temp">
+                <span class="temp-label">Minima</span>
+                <span class="temp-value">{{ weatherData.main.temp_min | number:'1.1-1' }}°C</span>
+              </div>
+              <div class="temp-item max-temp">
+                <span class="temp-label">Massima</span>
+                <span class="temp-value">{{ weatherData.main.temp_max | number:'1.1-1' }}°C</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Condizioni -->
+          <div class="detail-card conditions-card">
+            <div class="card-header">
+              <span class="card-icon">🌤️</span>
+              <h3>Condizioni</h3>
+            </div>
+            <div class="conditions-content">
+              <img 
+                [src]="'https://openweathermap.org/img/wn/' + weatherData.weather[0].icon + '@4x.png'" 
+                [alt]="weatherData.weather[0].description"
+                class="weather-icon-large"
+              >
+              <div class="conditions-text">
+                <h4>{{ weatherData.weather[0].main }}</h4>
+                <p>{{ weatherData.weather[0].description | titlecase }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dettagli Atmosferici -->
+          <div class="detail-card atmospheric-card">
+            <div class="card-header">
+              <span class="card-icon">🌬️</span>
+              <h3>Atmosfera</h3>
+            </div>
+            <div class="atmospheric-grid">
+              <div class="atmospheric-item">
+                <span class="atmospheric-icon">💧</span>
+                <div class="atmospheric-text">
+                  <span class="atmospheric-label">Umidità</span>
+                  <span class="atmospheric-value">{{ weatherData.main.humidity }}%</span>
+                </div>
+              </div>
+              <div class="atmospheric-item">
+                <span class="atmospheric-icon">📊</span>
+                <div class="atmospheric-text">
+                  <span class="atmospheric-label">Pressione</span>
+                  <span class="atmospheric-value">{{ weatherData.main.pressure }} hPa</span>
+                </div>
+              </div>
+              <div class="atmospheric-item">
+                <span class="atmospheric-icon">👁️</span>
+                <div class="atmospheric-text">
+                  <span class="atmospheric-label">Visibilità</span>
+                  <span class="atmospheric-value">{{ weatherData.visibility / 1000 }} km</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vento -->
+          <div class="detail-card wind-card">
+            <div class="card-header">
+              <span class="card-icon">💨</span>
+              <h3>Vento</h3>
+            </div>
+            <div class="wind-content">
+              <div class="wind-speed">
+                <span class="wind-value">{{ weatherData.wind.speed }}</span>
+                <span class="wind-unit">m/s</span>
+              </div>
+              <p class="wind-description">
+                Velocità del vento attuale
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button (click)="goBack()" class="btn btn-primary">
+            ← Torna alla Ricerca
+          </button>
+        </div>
+      </div>
+    } @else {
+      <div class="error-container">
+        <h2>Nessun dato meteo disponibile</h2>
+        <button (click)="goBack()" class="btn btn-primary">
+          ← Torna alla Home
+        </button>
+      </div>
+    }
+  `,
+  styleUrls: ['./details.css'],
+  standalone: true,
+  imports: [CommonModule]
+})
+export class DetailsComponent {
+  weatherData: WeatherData;
+
+  constructor(private router: Router) {
+    const navigation = this.router.getCurrentNavigation();
+    this.weatherData = navigation?.extras?.state?.['weatherData'];
+    
+    if (!this.weatherData) {
+      console.log('Nessun dato ricevuto, redirect a home');
+      this.router.navigate(['/']);
+    }
+  }
+
+  get today(): Date {
+    return new Date();
+  }
+
+  goBack() {
+    console.log('Torno alla home');
+    this.router.navigate(['/']);
+  }
+
+  getTemperatureColor(temp: number): string {
+    if (temp < 0) return '#74b9ff';
+    if (temp < 10) return '#00cec9';
+    if (temp < 20) return '#00b894';
+    if (temp < 30) return '#fdcb6e';
+    return '#e17055';
+  }
+}
