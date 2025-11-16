@@ -31,7 +31,7 @@ export interface WeatherData {
 })
 export class WeatherService {
   // PER TEST - usa una città fissa per debug
-  private apiKey = 'tuachiave'; // METTI LA TUA API KEY QUI
+  private apiKey = 'HwTV2GGJdT8LCwddG3gmaDc4Xe6uykhXXIUTXsk6'; // METTI LA TUA API KEY QUI
   private apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
   constructor(private http: HttpClient) {}

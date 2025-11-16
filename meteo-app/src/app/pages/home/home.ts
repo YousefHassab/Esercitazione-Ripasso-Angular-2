@@ -221,4 +221,5 @@ export class HomeComponent {
     this.weatherData = null;
     this.error = '';
   }
+  
 }
