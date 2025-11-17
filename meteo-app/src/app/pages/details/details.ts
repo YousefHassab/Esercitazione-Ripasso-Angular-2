@@ -16,7 +16,8 @@ import { WeatherData } from '../../services/weather.service';
         </div>
 
         <div class="city-header">
-          <h2>{{ weatherData.name }}, {{ weatherData.sys.country }}</h2>
+          <!-- RIMOSSO IL PAESE - SOLO NOME CITTA' -->
+          <h2>{{ weatherData.name }}</h2>
           <p class="current-time">{{ today | date:'dd/MM/yyyy HH:mm' }}</p>
         </div>
 

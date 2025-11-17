@@ -53,7 +53,8 @@ import { WeatherService, WeatherData } from '../../services/weather.service';
       @if (weatherData && !loading) {
         <div class="weather-card">
           <div class="weather-header">
-            <h2>{{ weatherData.name }}, {{ weatherData.sys.country }}</h2>
+            <!-- RIMOSSO IL PAESE - SOLO NOME CITTA' -->
+            <h2>{{ weatherData.name }}</h2>
             <p class="current-time">{{ today | date:'dd/MM/yyyy HH:mm' }}</p>
           </div>
 
@@ -158,52 +159,68 @@ export class HomeComponent {
     this.error = '';
     this.weatherData = null;
 
-    // Usa dati mock per test
-    this.useMockData();
-  }
-
-  useMockData() {
-    this.loading = true;
-    setTimeout(() => {
-      this.weatherData = {
-        name: this.city || 'Roma',
-        main: {
-          temp: 20 + Math.floor(Math.random() * 10),
-          feels_like: 19,
-          humidity: 65,
-          pressure: 1013,
-          temp_min: 18,
-          temp_max: 25
-        },
-        weather: [{
-          main: 'Clouds',
-          description: 'nuvole sparse',
-          icon: '03d'
-        }],
-        wind: {
-          speed: 3.5
-        },
-        sys: {
-          country: 'IT'
-        },
-        visibility: 10000
-      };
-      this.loading = false;
-      console.log('Dati mock caricati:', this.weatherData);
-    }, 1500);
+    // SOSTITUITO: ora usa l'API reale invece dei mock
+    this.weatherService.getWeather(this.city).subscribe({
+      next: (data) => {
+        this.weatherData = data;
+        this.loading = false;
+        console.log('Dati API ricevuti:', data);
+      },
+      error: (err) => {
+        this.error = err.message;
+        this.loading = false;
+        console.error('Errore API:', err);
+      }
+    });
   }
 
   getCurrentLocation() {
     console.log('Cliccato posizione corrente');
+    
+    if (!navigator.geolocation) {
+      this.error = 'Geolocalizzazione non supportata dal browser';
+      return;
+    }
+
     this.loading = true;
     this.error = '';
     this.weatherData = null;
     
-    // Simula geolocalizzazione
-    setTimeout(() => {
-      this.useMockData();
-      this.city = 'Posizione Attuale';
-    }, 1000);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        
+        this.weatherService.getWeatherByCoords(lat, lon).subscribe({
+          next: (data) => {
+            this.weatherData = data;
+            this.loading = false;
+            this.city = data.name;
+            console.log('Dati posizione ricevuti:', data);
+          },
+          error: (err) => {
+            this.error = err.message;
+            this.loading = false;
+          }
+        });
+      },
+      (error) => {
+        this.loading = false;
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            this.error = 'Permesso di localizzazione negato';
+            break;
+          case error.POSITION_UNAVAILABLE:
+            this.error = 'Posizione non disponibile';
+            break;
+          case error.TIMEOUT:
+            this.error = 'Timeout nella richiesta di posizione';
+            break;
+          default:
+            this.error = 'Errore nella geolocalizzazione';
+        }
+      }
+    );
   }
 
   viewDetails() {
@@ -221,5 +238,4 @@ export class HomeComponent {
     this.weatherData = null;
     this.error = '';
   }
-  
 }
