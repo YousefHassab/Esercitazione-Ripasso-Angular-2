@@ -31,10 +31,6 @@ import { WeatherService, WeatherData } from '../../services/weather.service';
             </button>
           </div>
         </div>
-        
-        <button (click)="getCurrentLocation()" class="btn btn-location">
-          📍 Meteo nella mia posizione
-        </button>
       </div>
 
       @if (loading) {
@@ -122,7 +118,6 @@ import { WeatherService, WeatherData } from '../../services/weather.service';
           <h3>Come utilizzare l'app:</h3>
           <ul>
             <li>🔍 Inserisci il nome di una città e premi Cerca</li>
-            <li>📍 Oppure clicca "Meteo nella mia posizione"</li>
             <li>📊 Visualizza i dettagli completi del meteo</li>
           </ul>
         </div>
@@ -138,6 +133,7 @@ export class HomeComponent {
   weatherData: WeatherData | null = null;
   loading: boolean = false;
   error: string = '';
+  backgroundClass: string = 'default-bg';
 
   constructor(
     private weatherService: WeatherService,
@@ -159,10 +155,10 @@ export class HomeComponent {
     this.error = '';
     this.weatherData = null;
 
-    // SOSTITUITO: ora usa l'API reale invece dei mock
     this.weatherService.getWeather(this.city).subscribe({
       next: (data) => {
         this.weatherData = data;
+        this.updateBackground(data);
         this.loading = false;
         console.log('Dati API ricevuti:', data);
       },
@@ -174,53 +170,30 @@ export class HomeComponent {
     });
   }
 
-  getCurrentLocation() {
-    console.log('Cliccato posizione corrente');
+  // METODO AGGIUNTO: Aggiorna il background in base alle condizioni meteo
+  updateBackground(weatherData: WeatherData) {
+    const condition = weatherData.weather[0].main.toLowerCase();
     
-    if (!navigator.geolocation) {
-      this.error = 'Geolocalizzazione non supportata dal browser';
-      return;
+    switch(condition) {
+      case 'clear':
+        this.backgroundClass = 'sunny-bg';
+        break;
+      case 'clouds':
+        this.backgroundClass = 'cloudy-bg';
+        break;
+      case 'rain':
+      case 'drizzle':
+      case 'thunderstorm':
+        this.backgroundClass = 'rainy-bg';
+        break;
+      case 'snow':
+        this.backgroundClass = 'snow-bg';
+        break;
+      default:
+        this.backgroundClass = 'default-bg';
     }
-
-    this.loading = true;
-    this.error = '';
-    this.weatherData = null;
     
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-        
-        this.weatherService.getWeatherByCoords(lat, lon).subscribe({
-          next: (data) => {
-            this.weatherData = data;
-            this.loading = false;
-            this.city = data.name;
-            console.log('Dati posizione ricevuti:', data);
-          },
-          error: (err) => {
-            this.error = err.message;
-            this.loading = false;
-          }
-        });
-      },
-      (error) => {
-        this.loading = false;
-        switch (error.code) {
-          case error.PERMISSION_DENIED:
-            this.error = 'Permesso di localizzazione negato';
-            break;
-          case error.POSITION_UNAVAILABLE:
-            this.error = 'Posizione non disponibile';
-            break;
-          case error.TIMEOUT:
-            this.error = 'Timeout nella richiesta di posizione';
-            break;
-          default:
-            this.error = 'Errore nella geolocalizzazione';
-        }
-      }
-    );
+    console.log('Background aggiornato:', this.backgroundClass);
   }
 
   viewDetails() {
@@ -237,5 +210,6 @@ export class HomeComponent {
     this.city = '';
     this.weatherData = null;
     this.error = '';
+    this.backgroundClass = 'default-bg';
   }
 }
