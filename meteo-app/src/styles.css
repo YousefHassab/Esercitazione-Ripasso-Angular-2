@@ -1,106 +1,128 @@
-/* Reset e Base */
+/* ------------------------------- */
+/* 📌 RESET E STILI BASE           */
+/* ------------------------------- */
+
+/* Reset di margini, padding e box-sizing per uniformare lo stile in tutti i browser */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Stile generale del corpo della pagina */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-  color: #333;
-  line-height: 1.4;
-  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font moderno e leggibile */
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); /* Sfondo sfumato blu */
+  color: #333; /* Colore del testo */
+  line-height: 1.4; /* Altezza delle righe */
+  min-height: 100vh; /* Altezza minima: tutta la pagina */
 }
 
-/* Header */
+/* ------------------------------- */
+/* 📌 HEADER E NAVBAR              */
+/* ------------------------------- */
+
 .app-header {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95); /* Header bianco semi-trasparente */
+  backdrop-filter: blur(10px); /* Effetto vetro sfocato */
   padding: 0;
-  box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.1); /* Leggera ombra */
   border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
 .app-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex; /* Disposizione orizzontale */
+  justify-content: space-between; /* Spazio tra logo e link */
+  align-items: center; /* Centra verticalmente */
+  max-width: 1200px; /* Larghezza massima */
+  margin: 0 auto; /* Centra nel body */
   padding: 0 20px;
   height: 70px;
 }
 
+/* Logo dell’app */
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 10px; /* Spazio icona/titolo */
   color: #2c3e50;
   text-decoration: none;
   font-size: 24px;
   font-weight: bold;
 }
 
+/* Piccola icona meteo prima del testo del logo */
 .logo::before {
   content: "🌤️";
   font-size: 28px;
 }
 
+/* Lista dei link di navigazione */
 .nav-links {
   display: flex;
-  gap: 30px;
-  list-style: none;
+  gap: 30px; /* Spaziatura tra i link */
+  list-style: none; /* Rimuove i pallini */
 }
 
+/* Stile dei link */
 .nav-links a {
   color: #2c3e50;
-  text-decoration: none;
+  text-decoration: none; /* Nessuna sottolineatura */
   font-weight: 500;
   padding: 8px 16px;
-  border-radius: 20px;
-  transition: all 0.3s;
+  border-radius: 20px; /* Effetto pillola */
+  transition: all 0.3s; /* Animazione hover */
 }
 
+/* Effetto hover e link attivo */
 .nav-links a:hover,
 .nav-links a.active {
   background: rgba(52, 152, 219, 0.1);
   color: #3498db;
 }
 
-/* Main Content */
+/* ------------------------------- */
+/* 📌 CONTENUTO PRINCIPALE         */
+/* ------------------------------- */
+
 .main-content {
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 0 auto; /* Centra tutto */
   padding: 20px;
 }
 
-/* Bottoni */
+/* ------------------------------- */
+/* 📌 BOTTONI                      */
+/* ------------------------------- */
+
 .btn {
   padding: 12px 24px;
   border: none;
-  border-radius: 25px;
+  border-radius: 25px; /* Bottoni arrotondati */
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
   text-decoration: none;
-  display: inline-flex;
+  display: inline-flex; /* Permette icone + testo */
   align-items: center;
   gap: 8px;
   font-size: 14px;
 }
 
+/* Bottone principale (blu) */
 .btn-primary {
   background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
   color: white;
   box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
 }
 
+/* Effetto hover */
 .btn-primary:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px); /* Si solleva leggermente */
   box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
 }
 
+/* Bottone secondario (grigio) */
 .btn-secondary {
   background: #95a5a6;
   color: white;
@@ -110,6 +132,7 @@ body {
   background: #7f8c8d;
 }
 
+/* Bottone trasparente con bordo */
 .btn-outline {
   background: transparent;
   color: white;
@@ -121,16 +144,22 @@ body {
   border-color: rgba(255,255,255,0.5);
 }
 
-/* Utility */
+/* ------------------------------- */
+/* 📌 UTILITY CLASSES             */
+/* ------------------------------- */
+
 .text-center { text-align: center; }
 .mt-1 { margin-top: 10px; }
 .mt-2 { margin-top: 20px; }
 .mt-3 { margin-top: 30px; }
 
-/* Responsive */
+/* ------------------------------- */
+/* 📌 RESPONSIVE (per schermi piccoli) */
+/* ------------------------------- */
+
 @media (max-width: 768px) {
   .app-nav {
-    flex-direction: column;
+    flex-direction: column; /* Impila logo e link verticalmente */
     height: auto;
     padding: 15px 20px;
     gap: 15px;

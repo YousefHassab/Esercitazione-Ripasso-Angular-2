@@ -1,29 +1,52 @@
+/* Reset universale: rimuove margini e padding di default per tutti gli elementi,
+   e imposta box-sizing in modo che larghezza/altezza includano anche i bordi */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Stili generali del body della pagina */
 body {
+  /* Font moderno e molto leggibile */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  /* Sfondo sfumato diagonale (effetto gradient da viola a blu) */
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+  /* Altezza minima dell’intera finestra: occupa sempre lo schermo */
   min-height: 100vh;
+
+  /* Colore del testo principale */
   color: #2d3436;
+
+  /* Impedisce lo scroll orizzontale se il contenuto eccede */
   overflow-x: hidden;
 }
 
-/* Smooth scrolling */
+/* Abilita lo scroll fluido quando si usano link con ancora (#) o si scorre la pagina */
 html {
   scroll-behavior: smooth;
 }
 
-/* Selection color */
+/* Colore personalizzato quando selezioni del testo */
 ::selection {
-  background: rgba(102, 126, 234, 0.3);
-  color: inherit;
+  background: rgba(102, 126, 234, 0.3); /* Azzurrino trasparente */
+  color: inherit; /* Mantiene lo stesso colore del testo */
 }
 
-/* Loading animation for route transitions */
+/* Classe usata probabilmente per animare il cambio pagina (routing Angular)
+   Applica un'animazione di fade-in a qualsiasi elemento che la utilizzi */
 .route-transition {
   animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Animazione definita: graduale comparsa del contenuto */
+@keyframes fadeIn {
+  from {
+    opacity: 0;   /* Parte invisibile */
+  }
+  to {
+    opacity: 1;   /* Diventa completamente visibile */
+  }
 }

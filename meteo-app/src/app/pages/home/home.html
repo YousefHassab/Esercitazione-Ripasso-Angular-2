@@ -1,11 +1,41 @@
+<!-- 
+  CONTENITORE PRINCIPALE DELLA HOME PAGE
+  - Definisce l'area principale dell'applicazione
+  - Contiene tutti gli elementi dell'interfaccia
+-->
 <div class="home-container">
+
+  <!-- 
+    HEADER DELL'APPLICAZIONE
+    - Contiene il titolo e la descrizione dell'app
+    - Fornisce il contesto all'utente su cosa fa l'applicazione
+  -->
   <header class="header">
-    <h1>🌤️ Meteo App</h1>
-    <p>Scopri le condizioni meteo in tempo reale</p>
+    <h1>🌤️ Meteo App</h1>                    <!-- Titolo con emoji per visibilità -->
+    <p>Scopri le condizioni meteo in tempo reale</p>  <!-- Sottotitolo esplicativo -->
   </header>
 
+  <!-- 
+    SEZIONE DI RICERCA
+    - Area dedicata all'interazione principale: cercare una città
+    - Contiene input e pulsanti per le azioni
+  -->
   <div class="search-section">
+    
+    <!-- 
+      BOX DI RICERCA PRINCIPALE
+      - Raggruppa input e pulsanti di ricerca
+    -->
     <div class="search-box">
+      
+      <!-- 
+        INPUT DI RICERCA CITTA'
+        - type="text": campo di testo per input utente
+        - [(ngModel)]="city": two-way data binding con la proprietà 'city' del componente
+        - placeholder: testo guida per l'utente
+        - (keyup.enter): event binding che scatena la ricerca quando si preme INVIO
+        - class: styling CSS per l'input
+      -->
       <input 
         type="text" 
         [(ngModel)]="city" 
@@ -13,104 +43,239 @@
         (keyup.enter)="searchWeather()"
         class="search-input"
       >
+      
+      <!-- 
+        CONTAINER PULSANTI DI RICERCA
+        - Raggruppa i due pulsanti principali
+      -->
       <div class="search-buttons">
+        
+        <!-- 
+          PULSANTE CERCA PRIMARIO
+          - (click): event binding che chiama searchWeather() al click
+          - class="btn btn-primary": styling per pulsante principale
+          - 🔍: emoji che rappresenta visivamente l'azione di ricerca
+        -->
         <button (click)="searchWeather()" class="btn btn-primary">
           🔍 Cerca
         </button>
+        
+        <!-- 
+          PULSANTE PULISCI SECONDARIO
+          - (click): event binding che chiama clearSearch() al click
+          - class="btn btn-secondary": styling per pulsante secondario
+          - ❌: emoji che rappresenta visivamente l'azione di cancellazione
+        -->
         <button (click)="clearSearch()" class="btn btn-secondary">
           ❌ Pulisci
         </button>
       </div>
     </div>
     
+    <!-- 
+      PULSANTE GEOLOCALIZZAZIONE
+      - (click): event binding che chiama getCurrentLocation() al click
+      - class="btn btn-location": styling specifico per questo pulsante
+      - 📍: emoji che rappresenta visivamente la geolocalizzazione
+    -->
     <button (click)="getCurrentLocation()" class="btn btn-location">
       📍 Meteo nella mia posizione
     </button>
   </div>
 
+  <!-- 
+    DIRECTIVE ANGULAR: @if (loading)
+    - Visualizza questo blocco SOLO quando loading = true
+    - Mostra lo stato di caricamento durante le chiamate API
+  -->
   @if (loading) {
     <div class="loading-state">
-      <div class="spinner"></div>
-      <p>Ricerca meteo in corso...</p>
+      <div class="spinner"></div>        <!-- Animazione di caricamento -->
+      <p>Ricerca meteo in corso...</p>   <!-- Messaggio informativo per l'utente -->
     </div>
   }
 
+  <!-- 
+    DIRECTIVE ANGULAR: @if (error && !loading)
+    - Visualizza questo blocco SOLO quando c'è un errore E non siamo in caricamento
+    - Mostra i messaggi di errore all'utente
+  -->
   @if (error && !loading) {
     <div class="error-state">
-      ⚠️ {{ error }}
+      ⚠️ {{ error }}    <!-- Interpolazione: mostra il contenuto della proprietà 'error' -->
     </div>
   }
 
+  <!-- 
+    DIRECTIVE ANGULAR: @if (weatherData && !loading)
+    - Visualizza questo blocco SOLO quando ci sono dati meteo E non siamo in caricamento
+    - Contiene la card principale con i dati meteo
+  -->
   @if (weatherData && !loading) {
     <div class="weather-card">
+      
+      <!-- 
+        HEADER DELLA CARD METEO
+        - Contiene informazioni sulla località e data/ora
+      -->
       <div class="weather-header">
+        <!-- 
+          NOME CITTA' E PAESE
+          - {{ weatherData.name }}: nome della città dall'API
+          - {{ weatherData.sys.country }}: codice paese dall'API
+        -->
         <h2>{{ weatherData.name }}, {{ weatherData.sys.country }}</h2>
+        
+        <!-- 
+          DATA E ORA CORRENTE
+          - {{ today | date:'dd/MM/yyyy HH:mm' }}: 
+            * today: proprietà del componente che restituisce la data corrente
+            * | date: pipe Angular che formatta la data
+            * 'dd/MM/yyyy HH:mm': formato italiano (giorno/mese/anno ore:minuti)
+        -->
         <p class="current-time">{{ today | date:'dd/MM/yyyy HH:mm' }}</p>
       </div>
 
+      <!-- 
+        SEZIONE PRINCIPALE DATI METEO
+        - Contiene temperatura e condizioni principali
+      -->
       <div class="weather-main">
+        
+        <!-- 
+          SEZIONE TEMPERATURA E ICONA
+          - Combina icona meteo e valore temperatura
+        -->
         <div class="temperature-section">
+          
+          <!-- 
+            ICONA METEO DINAMICA
+            - [src]: property binding per l'URL dinamico dell'icona
+            - 'https://openweathermap.org/img/wn/' + weatherData.weather[0].icon + '@2x.png':
+              costruisce l'URL dell'icona basandosi sul codice dall'API
+            - [alt]: property binding per testo alternativo accessibile
+            - weatherData.weather[0].description: descrizione testuale delle condizioni
+          -->
           <img 
             [src]="'https://openweathermap.org/img/wn/' + weatherData.weather[0].icon + '@2x.png'" 
             [alt]="weatherData.weather[0].description"
             class="weather-icon"
           >
+          
+          <!-- 
+            VALORE TEMPERATURA
+            - Contiene il numero e l'unità di misura
+          -->
           <div class="temperature">
+            <!-- 
+              TEMPERATURA ATTUALE
+              - {{ weatherData.main.temp | number:'1.0-0' }}:
+                * weatherData.main.temp: temperatura dall'API
+                * | number: pipe Angular per formattazione numerica
+                * '1.0-0': formato con 0 decimali
+            -->
             <span class="temp-value">{{ weatherData.main.temp | number:'1.0-0' }}</span>
-            <span class="temp-unit">°C</span>
+            <span class="temp-unit">°C</span>   <!-- Unità di misura -->
           </div>
         </div>
 
+        <!-- 
+          INFO METEO AGGIUNTIVE
+          - Descrizione condizioni e temperatura percepita
+        -->
         <div class="weather-info">
+          <!-- 
+            DESCRIZIONE CONDIZIONI METEO
+            - {{ weatherData.weather[0].description | titlecase }}:
+              * description: descrizione testuale dall'API
+              * | titlecase: pipe Angular che mette in maiuscolo ogni parola
+          -->
           <p class="weather-description">{{ weatherData.weather[0].description | titlecase }}</p>
+          
+          <!-- 
+            TEMPERATURA PERCEPITA
+            - Stessa formattazione della temperatura principale
+          -->
           <p class="feels-like">Percepiti: {{ weatherData.main.feels_like | number:'1.0-0' }}°C</p>
         </div>
       </div>
 
+      <!-- 
+        DETTAGLI METEO ADDIZIONALI
+        - 4 card con informazioni specifiche
+      -->
       <div class="weather-details">
+        
+        <!-- CARD UMIDITA' -->
         <div class="detail-item">
-          <span class="detail-icon">💧</span>
+          <span class="detail-icon">💧</span>   <!-- Emoji rappresentativa -->
           <div class="detail-text">
             <span class="detail-label">Umidità</span>
+            <!-- Valore umidità in percentuale dall'API -->
             <span class="detail-value">{{ weatherData.main.humidity }}%</span>
           </div>
         </div>
 
+        <!-- CARD VENTO -->
         <div class="detail-item">
-          <span class="detail-icon">💨</span>
+          <span class="detail-icon">💨</span>   <!-- Emoji rappresentativa -->
           <div class="detail-text">
             <span class="detail-label">Vento</span>
+            <!-- Velocità vento in metri/secondo dall'API -->
             <span class="detail-value">{{ weatherData.wind.speed }} m/s</span>
           </div>
         </div>
 
+        <!-- CARD PRESSIONE -->
         <div class="detail-item">
-          <span class="detail-icon">📊</span>
+          <span class="detail-icon">📊</span>   <!-- Emoji rappresentativa -->
           <div class="detail-text">
             <span class="detail-label">Pressione</span>
+            <!-- Pressione atmosferica in hPa dall'API -->
             <span class="detail-value">{{ weatherData.main.pressure }} hPa</span>
           </div>
         </div>
 
+        <!-- CARD VISIBILITA' -->
         <div class="detail-item">
-          <span class="detail-icon">👁️</span>
+          <span class="detail-icon">👁️</span>   <!-- Emoji rappresentativa -->
           <div class="detail-text">
             <span class="detail-label">Visibilità</span>
+            <!-- 
+              VISIBILITA' CONVERTITA IN KM
+              - {{ weatherData.visibility / 1000 }}: 
+                * visibility: valore in metri dall'API
+                * diviso 1000 per convertire in km
+            -->
             <span class="detail-value">{{ weatherData.visibility / 1000 }} km</span>
           </div>
         </div>
       </div>
 
+      <!-- 
+        PULSANTE DETTAGLI COMPLETI
+        - Naviga alla pagina dei dettagli completi
+        - (click): chiama viewDetails() che gestisce la navigazione
+      -->
       <button (click)="viewDetails()" class="btn btn-details">
         📊 Vedi Dettagli Completi
       </button>
     </div>
   }
 
+  <!-- 
+    DIRECTIVE ANGULAR: @if (!weatherData && !loading && !error)
+    - Visualizza questo blocco SOLO quando:
+      * Non ci sono dati meteo
+      * Non siamo in caricamento  
+      * Non ci sono errori
+    - Mostra le istruzioni per l'uso quando l'app è nello stato iniziale
+  -->
   @if (!weatherData && !loading && !error) {
     <div class="instructions">
       <h3>Come utilizzare l'app:</h3>
       <ul>
+        <!-- Lista istruzioni con emoji per migliorare la visibilità -->
         <li>🔍 Inserisci il nome di una città e premi Cerca</li>
         <li>📍 Oppure clicca "Meteo nella mia posizione"</li>
         <li>📊 Visualizza i dettagli completi del meteo</li>

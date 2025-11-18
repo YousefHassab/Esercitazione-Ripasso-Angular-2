@@ -1,361 +1,414 @@
-/* Details Container */
+/* 
+ * CONTENITORE PRINCIPALE DELLA PAGINA DETTAGLI
+ * Definisce l'area principale che contiene tutti i dettagli meteo
+ */
 .details-container {
-  max-width: 900px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  overflow: hidden;
+  max-width: 900px;                    /* Larghezza massima per desktop */
+  margin: 0 auto;                      /* Centra il contenitore orizzontalmente */
+  background: white;                   /* Sfondo bianco */
+  border-radius: 4px;                  /* Angoli leggermente arrotondati */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Ombra leggera per profondità */
+  overflow: hidden;                    /* Nasconde il contenuto che fuoriesce */
 }
 
+/* 
+ * HEADER DELLA PAGINA DETTAGLI
+ * Contiene il pulsante back e il titolo della pagina
+ */
 .details-header {
-  background: #34495e;
-  padding: 20px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #ecf0f1;
-  border-bottom: 1px solid #2c3e50;
+  background: #34495e;                 /* Sfondo blu scuro */
+  padding: 20px 30px;                  /* Spaziatura interna */
+  display: flex;                       /* Layout flexbox */
+  justify-content: space-between;      /* Distribuisce spazio tra gli elementi */
+  align-items: center;                 /* Allineamento verticale al centro */
+  color: #ecf0f1;                     /* Colore testo grigio chiaro */
+  border-bottom: 1px solid #2c3e50;   /* Linea di separazione più scura */
 }
 
 .details-header h1 {
-  font-size: 20px;
-  font-weight: 500;
-  margin: 0;
-  color: #ecf0f1;
+  font-size: 20px;                     /* Dimensione font media */
+  font-weight: 500;                    /* Peso font medio */
+  margin: 0;                           /* Rimuove margini di default */
+  color: #ecf0f1;                     /* Colore testo grigio chiaro */
 }
 
+/* 
+ * PULSANTE BACK
+ * Permette all'utente di tornare alla home page
+ */
 .back-btn {
-  background: transparent;
-  color: #bdc3c7;
-  border: 1px solid #5a6c7d;
-  padding: 8px 16px;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-weight: 400;
-  font-size: 13px;
+  background: transparent;             /* Sfondo trasparente */
+  color: #bdc3c7;                     /* Colore testo grigio */
+  border: 1px solid #5a6c7d;          /* Bordo grigio-blu */
+  padding: 8px 16px;                  /* Spaziatura interna compatta */
+  border-radius: 3px;                 /* Angoli leggermente arrotondati */
+  cursor: pointer;                    /* Cambia cursore al hover */
+  transition: all 0.3s;               /* Transizione fluida per tutti gli effetti */
+  font-weight: 400;                   /* Peso font normale */
+  font-size: 13px;                    /* Dimensione font piccola */
 }
 
 .back-btn:hover {
-  background: #2c3e50;
-  color: #ecf0f1;
-  border-color: #7f8c8d;
+  background: #2c3e50;                /* Sfondo più scuro al hover */
+  color: #ecf0f1;                     /* Testo più chiaro al hover */
+  border-color: #7f8c8d;              /* Bordo più chiaro al hover */
 }
 
-/* City Header */
+/* 
+ * HEADER CITTA'
+ * Mostra il nome della città e la data/ora corrente
+ */
 .city-header {
-  background: #f8f9fa;
-  padding: 20px 30px;
-  border-bottom: 1px solid #ecf0f1;
-  text-align: center;
+  background: #f8f9fa;                /* Sfondo grigio molto chiaro */
+  padding: 20px 30px;                 /* Spaziatura interna */
+  border-bottom: 1px solid #ecf0f1;   /* Linea di separazione */
+  text-align: center;                 /* Allineamento testo al centro */
 }
 
 .city-header h2 {
-  font-size: 24px;
-  color: #2c3e50;
-  font-weight: 500;
-  margin-bottom: 6px;
+  font-size: 24px;                    /* Dimensione font grande */
+  color: #2c3e50;                     /* Colore testo blu scuro */
+  font-weight: 500;                   /* Peso font medio */
+  margin-bottom: 6px;                 /* Piccola spaziatura inferiore */
 }
 
 .current-time {
-  color: #7f8c8d;
-  font-size: 14px;
-  font-weight: 400;
+  color: #7f8c8d;                     /* Colore grigio per testo secondario */
+  font-size: 14px;                    /* Dimensione font piccola */
+  font-weight: 400;                   /* Peso font normale */
 }
 
-/* Details Grid */
+/* 
+ * GRIGLIA PRINCIPALE DEI DETTAGLI
+ * Layout a griglia 2x2 per le card informative
+ */
 .details-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0;
-  background: white;
+  display: grid;                      /* Layout grid */
+  grid-template-columns: repeat(2, 1fr); /* 2 colonne di uguale larghezza */
+  gap: 0;                            /* Nessuno spazio tra le colonne */
+  background: white;                 /* Sfondo bianco */
 }
 
+/* 
+ * CARD SINGOLA DEI DETTAGLI
+ * Contenitore per ogni sezione di informazioni
+ */
 .detail-card {
-  background: white;
-  border-bottom: 1px solid #ecf0f1;
-  border-right: 1px solid #ecf0f1;
-  padding: 25px;
-  transition: background 0.3s;
+  background: white;                 /* Sfondo bianco */
+  border-bottom: 1px solid #ecf0f1;  /* Linea di separazione inferiore */
+  border-right: 1px solid #ecf0f1;   /* Linea di separazione destra */
+  padding: 25px;                     /* Spaziatura interna generosa */
+  transition: background 0.3s;       /* Transizione fluida per hover */
 }
 
 .detail-card:hover {
-  background: #f8f9fa;
+  background: #f8f9fa;               /* Cambia sfondo al hover */
 }
 
-.detail-card:nth-child(odd) {
-  border-right: 1px solid #ecf0f1;
+/* 
+ * SELEZIONI SPECIFICHE PER LE CARD
+ * Gestisce i bordi per creare un layout a griglia pulito
+ */
+.detail-card:nth-child(odd) {        /* Card in posizione dispari (1, 3) */
+  border-right: 1px solid #ecf0f1;   /* Mantiene bordo destro */
 }
 
-.detail-card:nth-child(even) {
-  border-right: none;
+.detail-card:nth-child(even) {       /* Card in posizione pari (2, 4) */
+  border-right: none;                /* Rimuove bordo destro */
 }
 
-.detail-card:last-child,
-.detail-card:nth-last-child(2) {
-  border-bottom: none;
+.detail-card:last-child,             /* Ultima card */
+.detail-card:nth-last-child(2) {     /* Penultima card */
+  border-bottom: none;               /* Rimuove bordo inferiore */
 }
 
+/* 
+ * HEADER DI OGNI CARD
+ * Contiene icona e titolo della sezione
+ */
 .card-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 18px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #ecf0f1;
+  display: flex;                     /* Layout flexbox */
+  align-items: center;               /* Allineamento verticale al centro */
+  gap: 10px;                        /* Spazio tra icona e testo */
+  margin-bottom: 18px;               /* Spaziatura inferiore */
+  padding-bottom: 12px;              /* Spaziatura interna inferiore */
+  border-bottom: 1px solid #ecf0f1;  /* Linea di separazione */
 }
 
 .card-icon {
-  font-size: 18px;
-  color: #7f8c8d;
+  font-size: 18px;                   /* Dimensione font media per icone */
+  color: #7f8c8d;                    /* Colore grigio per icone */
 }
 
 .card-header h3 {
-  color: #2c3e50;
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0;
+  color: #2c3e50;                    /* Colore testo blu scuro */
+  font-size: 16px;                   /* Dimensione font media */
+  font-weight: 600;                  /* Peso font semi-grassetto */
+  margin: 0;                         /* Rimuove margini di default */
 }
 
-/* Temperature Card */
+/* 
+ * CARD TEMPERATURA
+ * Stili specifici per la sezione temperatura
+ */
 .temperature-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  display: grid;                     /* Layout grid per le temperature */
+  grid-template-columns: 1fr 1fr;    /* 2 colonne di uguale larghezza */
+  gap: 12px;                        /* Spazio tra gli elementi */
 }
 
 .temp-item {
-  background: #f8f9fa;
-  padding: 16px;
-  border-radius: 3px;
-  text-align: center;
-  border: 1px solid #ecf0f1;
-  transition: all 0.3s;
+  background: #f8f9fa;               /* Sfondo grigio chiaro */
+  padding: 16px;                     /* Spaziatura interna */
+  border-radius: 3px;                /* Angoli leggermente arrotondati */
+  text-align: center;                /* Allineamento testo al centro */
+  border: 1px solid #ecf0f1;         /* Bordo sottile */
+  transition: all 0.3s;              /* Transizione fluida per tutti gli effetti */
 }
 
 .temp-item:hover {
-  background: #ecf0f1;
-  border-color: #bdc3c7;
+  background: #ecf0f1;               /* Sfondo più scuro al hover */
+  border-color: #bdc3c7;             /* Bordo più scuro al hover */
 }
 
 .temp-item.current {
-  grid-column: 1 / -1;
-  background: #34495e;
-  color: #ecf0f1;
-  border: none;
+  grid-column: 1 / -1;               /* Occupa entrambe le colonne */
+  background: #34495e;               /* Sfondo blu scuro */
+  color: #ecf0f1;                    /* Testo bianco */
+  border: none;                      /* Rimuove bordo */
 }
 
 .temp-label {
-  display: block;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-  margin-bottom: 6px;
-  color: #7f8c8d;
+  display: block;                    /* Rende l'elemento blocco */
+  font-size: 11px;                   /* Dimensione font molto piccola */
+  font-weight: 600;                  /* Peso font semi-grassetto */
+  text-transform: uppercase;         /* Tutte maiuscole */
+  letter-spacing: 0.3px;             /* Spaziatura tra lettere */
+  margin-bottom: 6px;                /* Piccola spaziatura inferiore */
+  color: #7f8c8d;                    /* Colore grigio */
 }
 
 .temp-item.current .temp-label {
-  color: #bdc3c7;
+  color: #bdc3c7;                    /* Colore grigio chiaro per card corrente */
 }
 
 .temp-value {
-  display: block;
-  font-size: 18px;
-  font-weight: 600;
-  color: #2c3e50;
+  display: block;                    /* Rende l'elemento blocco */
+  font-size: 18px;                   /* Dimensione font media */
+  font-weight: 600;                  /* Peso font semi-grassetto */
+  color: #2c3e50;                    /* Colore blu scuro */
 }
 
 .temp-item.current .temp-value {
-  color: #ecf0f1;
-  font-size: 22px;
+  color: #ecf0f1;                    /* Colore bianco per card corrente */
+  font-size: 22px;                   /* Dimensione font più grande */
 }
 
-/* Conditions Card */
+/* 
+ * CARD CONDIZIONI METEO
+ * Stili per la sezione condizioni con icona grande
+ */
 .conditions-content {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  display: flex;                     /* Layout flexbox */
+  align-items: center;               /* Allineamento verticale al centro */
+  gap: 16px;                        /* Spazio tra icona e testo */
 }
 
 .weather-icon-large {
-  width: 80px;
-  height: 80px;
-  filter: brightness(0.9);
+  width: 80px;                       /* Larghezza fissa icona */
+  height: 80px;                      /* Altezza fissa icona */
+  filter: brightness(0.9);           /* Leggera riduzione luminosità */
 }
 
 .conditions-text h4 {
-  font-size: 18px;
-  color: #2c3e50;
-  margin-bottom: 6px;
-  font-weight: 500;
+  font-size: 18px;                   /* Dimensione font media */
+  color: #2c3e50;                    /* Colore blu scuro */
+  margin-bottom: 6px;                /* Piccola spaziatura inferiore */
+  font-weight: 500;                  /* Peso font medio */
 }
 
 .conditions-text p {
-  color: #7f8c8d;
-  font-size: 14px;
-  text-transform: capitalize;
-  margin: 0;
+  color: #7f8c8d;                    /* Colore grigio */
+  font-size: 14px;                   /* Dimensione font piccola */
+  text-transform: capitalize;        /* Prima lettera maiuscola */
+  margin: 0;                         /* Rimuove margini di default */
 }
 
-/* Atmospheric Card */
+/* 
+ * CARD ATMOSFERA
+ * Stili per la sezione dati atmosferici
+ */
 .atmospheric-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: flex;                     /* Layout flexbox */
+  flex-direction: column;            /* Disposizione verticale */
+  gap: 12px;                        /* Spazio tra gli elementi */
 }
 
 .atmospheric-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  background: #f8f9fa;
-  border-radius: 3px;
-  border: 1px solid #ecf0f1;
-  transition: background 0.3s;
+  display: flex;                     /* Layout flexbox */
+  align-items: center;               /* Allineamento verticale al centro */
+  gap: 12px;                        /* Spazio tra icona e testo */
+  padding: 12px;                     /* Spaziatura interna */
+  background: #f8f9fa;               /* Sfondo grigio chiaro */
+  border-radius: 3px;                /* Angoli leggermente arrotondati */
+  border: 1px solid #ecf0f1;         /* Bordo sottile */
+  transition: background 0.3s;       /* Transizione fluida per hover */
 }
 
 .atmospheric-item:hover {
-  background: #ecf0f1;
+  background: #ecf0f1;               /* Sfondo più scuro al hover */
 }
 
 .atmospheric-icon {
-  font-size: 16px;
-  width: 24px;
-  text-align: center;
-  color: #7f8c8d;
+  font-size: 16px;                   /* Dimensione font piccola per icone */
+  width: 24px;                       /* Larghezza fissa per allineamento */
+  text-align: center;                /* Centra l'icona */
+  color: #7f8c8d;                    /* Colore grigio */
 }
 
 .atmospheric-text {
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex: 1;                           /* Occupa tutto lo spazio disponibile */
+  display: flex;                     /* Layout flexbox */
+  justify-content: space-between;    /* Distribuisce spazio tra label e valore */
+  align-items: center;               /* Allineamento verticale al centro */
 }
 
 .atmospheric-label {
-  color: #5a6c7d;
-  font-weight: 500;
-  font-size: 13px;
+  color: #5a6c7d;                    /* Colore grigio-blu */
+  font-weight: 500;                  /* Peso font medio */
+  font-size: 13px;                   /* Dimensione font piccola */
 }
 
 .atmospheric-value {
-  color: #2c3e50;
-  font-weight: 600;
-  font-size: 14px;
+  color: #2c3e50;                    /* Colore blu scuro */
+  font-weight: 600;                  /* Peso font semi-grassetto */
+  font-size: 14px;                   /* Dimensione font piccola */
 }
 
-/* Wind Card */
+/* 
+ * CARD VENTO
+ * Stili per la sezione dati vento
+ */
 .wind-content {
-  text-align: center;
-  padding: 16px 0;
+  text-align: center;                /* Allineamento testo al centro */
+  padding: 16px 0;                   /* Spaziatura interna verticale */
 }
 
 .wind-speed {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 6px;
-  margin-bottom: 12px;
+  display: flex;                     /* Layout flexbox */
+  align-items: baseline;             /* Allinea sulla linea di base */
+  justify-content: center;           /* Centra orizzontalmente */
+  gap: 6px;                         /* Piccolo spazio tra valore e unità */
+  margin-bottom: 12px;               /* Spaziatura inferiore */
 }
 
 .wind-value {
-  font-size: 36px;
-  font-weight: 300;
-  color: #2c3e50;
-  line-height: 1;
+  font-size: 36px;                   /* Dimensione font molto grande */
+  font-weight: 300;                  /* Peso font leggero */
+  color: #2c3e50;                    /* Colore blu scuro */
+  line-height: 1;                    /* Altezza linea normale */
 }
 
 .wind-unit {
-  font-size: 16px;
-  color: #7f8c8d;
-  font-weight: 400;
+  font-size: 16px;                   /* Dimensione font media */
+  color: #7f8c8d;                    /* Colore grigio */
+  font-weight: 400;                  /* Peso font normale */
 }
 
 .wind-description {
-  color: #7f8c8d;
-  font-size: 13px;
-  margin: 0;
+  color: #7f8c8d;                    /* Colore grigio */
+  font-size: 13px;                   /* Dimensione font piccola */
+  margin: 0;                         /* Rimuove margini di default */
 }
 
-/* Actions */
+/* 
+ * SEZIONE AZIONI
+ * Contiene i pulsanti aggiuntivi
+ */
 .actions {
-  background: #f8f9fa;
-  padding: 20px 30px;
-  text-align: center;
-  border-top: 1px solid #ecf0f1;
+  background: #f8f9fa;               /* Sfondo grigio chiaro */
+  padding: 20px 30px;                /* Spaziatura interna */
+  text-align: center;                /* Allineamento testo al centro */
+  border-top: 1px solid #ecf0f1;     /* Linea di separazione superiore */
 }
 
-/* Error Container */
+/* 
+ * CONTENITORE ERRORI
+ * Stili per la visualizzazione degli errori
+ */
 .error-container {
-  padding: 50px 30px;
-  text-align: center;
-  background: white;
-  color: #7f8c8d;
+  padding: 50px 30px;                /* Spaziatura interna generosa */
+  text-align: center;                /* Allineamento testo al centro */
+  background: white;                 /* Sfondo bianco */
+  color: #7f8c8d;                    /* Colore grigio */
 }
 
 .error-container h2 {
-  color: #e74c3c;
-  font-size: 18px;
-  margin-bottom: 16px;
-  font-weight: 500;
+  color: #e74c3c;                    /* Colore rosso per errore */
+  font-size: 18px;                   /* Dimensione font media */
+  margin-bottom: 16px;               /* Spaziatura inferiore */
+  font-weight: 500;                  /* Peso font medio */
 }
 
-/* Responsive */
+/* 
+ * MEDIA QUERIES PER RESPONSIVE DESIGN
+ * Adatta il layout per schermi più piccoli
+ */
+
+/* Tablet e schermi medi (max 768px) */
 @media (max-width: 768px) {
   .details-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr;      /* Singola colonna invece di 2 */
   }
   
   .detail-card {
-    border-right: none;
+    border-right: none;              /* Rimuove bordo destro */
   }
   
   .detail-card:nth-child(odd) {
-    border-right: none;
+    border-right: none;              /* Rimuove bordo destro dalle card dispari */
   }
   
   .details-header {
-    flex-direction: column;
-    gap: 12px;
-    text-align: center;
-    padding: 16px 20px;
+    flex-direction: column;          /* Disposizione verticale */
+    gap: 12px;                      /* Spazio tra elementi */
+    text-align: center;              /* Allineamento testo al centro */
+    padding: 16px 20px;              /* Riduce spaziatura */
   }
   
   .conditions-content {
-    flex-direction: column;
-    text-align: center;
+    flex-direction: column;          /* Disposizione verticale */
+    text-align: center;              /* Allineamento testo al centro */
   }
   
   .temperature-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr;      /* Singola colonna per temperature */
   }
   
   .city-header {
-    padding: 16px 20px;
+    padding: 16px 20px;              /* Riduce spaziatura */
   }
   
   .city-header h2 {
-    font-size: 20px;
+    font-size: 20px;                 /* Riduce dimensione font */
   }
 }
 
+/* Smartphone (max 480px) */
 @media (max-width: 480px) {
   .detail-card {
-    padding: 20px;
+    padding: 20px;                   /* Riduce spaziatura interna */
   }
   
   .wind-value {
-    font-size: 28px;
+    font-size: 28px;                 /* Riduce dimensione font vento */
   }
   
   .temp-value {
-    font-size: 16px;
+    font-size: 16px;                 /* Riduce dimensione font temperature */
   }
   
   .temp-item.current .temp-value {
-    font-size: 18px;
+    font-size: 18px;                 /* Riduce dimensione font temperatura corrente */
   }
 }

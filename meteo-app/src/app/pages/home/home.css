@@ -1,390 +1,435 @@
-/* Home Container */
+/* 
+ * CONTENITORE PRINCIPALE DELLA HOME PAGE
+ * Definisce l'area principale che contiene tutta l'applicazione
+ */
 .home-container {
-  max-width: 900px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.2);
+  max-width: 900px;                    /* Larghezza massima per desktop */
+  margin: 0 auto;                      /* Centra il contenitore orizzontalmente */
+  background: rgba(255, 255, 255, 0.95); /* Sfondo bianco semi-trasparente */
+  backdrop-filter: blur(10px);         /* Effetto di sfocatura dello sfondo */
+  border-radius: 20px;                 /* Angoli arrotondati */
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1); /* Ombra leggera per effetto di profondità */
+  overflow: hidden;                    /* Nasconde il contenuto che fuoriesce */
+  border: 1px solid rgba(255,255,255,0.2); /* Bordo sottile semi-trasparente */
 }
 
-/* Header */
+/* 
+ * HEADER DELL'APPLICAZIONE
+ * Contiene titolo e descrizione dell'app
+ */
 .header {
-  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-  color: white;
-  padding: 40px 30px;
-  text-align: center;
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); /* Gradiente blu */
+  color: white;                       /* Testo bianco per contrasto */
+  padding: 40px 30px;                 /* Spaziatura interna: 40px alto, 30px laterale */
+  text-align: center;                 /* Allineamento testo al centro */
 }
 
 .header h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  font-size: 2.5rem;                  /* Dimensione font grande per il titolo */
+  font-weight: 700;                   /* Grassetto */
+  margin-bottom: 10px;                /* Spaziatura inferiore */
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3); /* Ombra al testo per leggibilità */
 }
 
 .header p {
-  font-size: 1.1rem;
-  opacity: 0.9;
-  font-weight: 300;
+  font-size: 1.1rem;                  /* Dimensione font leggermente più grande */
+  opacity: 0.9;                       /* Leggera trasparenza */
+  font-weight: 300;                   /* Peso font leggero */
 }
 
-/* Search Section */
+/* 
+ * SEZIONE DI RICERCA
+ * Area contenente input e pulsanti di ricerca
+ */
 .search-section {
-  padding: 30px;
-  border-bottom: 1px solid #ecf0f1;
+  padding: 30px;                      /* Spaziatura interna generosa */
+  border-bottom: 1px solid #ecf0f1;   /* Linea di separazione inferiore */
 }
 
 .search-box {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
-  align-items: center;
-  flex-wrap: wrap;
+  display: flex;                      /* Layout flexbox per allineamento orizzontale */
+  gap: 15px;                         /* Spazio tra gli elementi figli */
+  margin-bottom: 20px;               /* Spaziatura inferiore */
+  align-items: center;               /* Allineamento verticale al centro */
+  flex-wrap: wrap;                   /* Permette il wrap su schermi piccoli */
 }
 
 .search-input {
-  flex: 1;
-  min-width: 250px;
-  padding: 15px 20px;
-  border: 2px solid #e0e0e0;
-  border-radius: 12px;
-  font-size: 16px;
-  background: white;
-  transition: all 0.3s;
-  color: #2c3e50;
+  flex: 1;                           /* Occupa tutto lo spazio disponibile */
+  min-width: 250px;                  /* Larghezza minima per evitare elementi troppo piccoli */
+  padding: 15px 20px;                /* Spaziatura interna comoda */
+  border: 2px solid #e0e0e0;         /* Bordo grigio chiaro */
+  border-radius: 12px;               /* Angoli arrotondati */
+  font-size: 16px;                   /* Dimensione font standard per accessibilità */
+  background: white;                 /* Sfondo bianco */
+  transition: all 0.3s;              /* Transizione fluida per tutti gli effetti */
+  color: #2c3e50;                    /* Colore testo blu scuro */
 }
 
 .search-input:focus {
-  outline: none;
-  border-color: #3498db;
-  background: white;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  outline: none;                     /* Rimuove l'outline di default del browser */
+  border-color: #3498db;            /* Cambia colore bordo al focus */
+  background: white;                /* Mantiene sfondo bianco */
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1); /* Effetto glow al focus */
 }
 
 .search-input::placeholder {
-  color: #95a5a6;
+  color: #95a5a6;                   /* Colore grigio per il placeholder */
 }
 
 .search-buttons {
-  display: flex;
-  gap: 10px;
+  display: flex;                     /* Layout flexbox per i pulsanti */
+  gap: 10px;                        /* Spazio tra i pulsanti */
 }
 
 .btn-location {
-  background: #27ae60;
-  color: white;
-  width: 100%;
-  justify-content: center;
+  background: #27ae60;              /* Colore verde per il pulsante posizione */
+  color: white;                     /* Testo bianco */
+  width: 100%;                      /* Larghezza piena */
+  justify-content: center;          /* Allineamento contenuto al centro */
 }
 
 .btn-location:hover {
-  background: #229954;
+  background: #229954;              /* Colore verde più scuro al hover */
 }
 
-/* Weather Card */
+/* 
+ * CARD METEO
+ * Contenitore principale per la visualizzazione dei dati meteo
+ */
 .weather-card {
-  background: white;
-  margin: 0;
-  border-radius: 0;
-  border-bottom: 1px solid #ecf0f1;
+  background: white;                /* Sfondo bianco */
+  margin: 0;                        /* Rimuove margini */
+  border-radius: 0;                 /* Rimuove border-radius */
+  border-bottom: 1px solid #ecf0f1; /* Linea di separazione inferiore */
 }
 
+/* 
+ * HEADER DELLA CARD METEO
+ * Contiene nome città e data/ora
+ */
 .weather-header {
-  background: #f8f9fa;
-  padding: 25px 30px;
-  border-bottom: 1px solid #ecf0f1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background: #f8f9fa;              /* Sfondo grigio molto chiaro */
+  padding: 25px 30px;               /* Spaziatura interna */
+  border-bottom: 1px solid #ecf0f1; /* Linea di separazione */
+  display: flex;                    /* Layout flexbox */
+  justify-content: space-between;   /* Distribuisce spazio tra gli elementi */
+  align-items: center;              /* Allineamento verticale al centro */
 }
 
 .weather-header h2 {
-  font-size: 1.8rem;
-  color: #2c3e50;
-  font-weight: 600;
-  margin: 0;
+  font-size: 1.8rem;                /* Dimensione font grande */
+  color: #2c3e50;                   /* Colore testo blu scuro */
+  font-weight: 600;                 /* Peso font semi-grassetto */
+  margin: 0;                        /* Rimuove margini di default */
 }
 
 .current-time {
-  color: #7f8c8d;
-  font-size: 0.9rem;
-  font-weight: 400;
+  color: #7f8c8d;                   /* Colore grigio per testo secondario */
+  font-size: 0.9rem;                /* Dimensione font piccola */
+  font-weight: 400;                 /* Peso font normale */
 }
 
+/* 
+ * SEZIONE PRINCIPALE METEO
+ * Contiene temperatura, icona e descrizione
+ */
 .weather-main {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 30px;
-  padding: 30px;
-  align-items: center;
+  display: grid;                    /* Layout grid per disposizione a griglia */
+  grid-template-columns: auto 1fr;  /* Colonna per icona/temp e col per info */
+  gap: 30px;                       /* Spazio tra le colonne */
+  padding: 30px;                   /* Spaziatura interna */
+  align-items: center;             /* Allineamento verticale al centro */
 }
 
 .temperature-section {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+  display: flex;                   /* Layout flexbox */
+  align-items: center;             /* Allineamento verticale al centro */
+  gap: 20px;                      /* Spazio tra icona e temperatura */
 }
 
 .weather-icon {
-  width: 100px;
-  height: 100px;
+  width: 100px;                   /* Larghezza fissa per l'icona */
+  height: 100px;                  /* Altezza fissa per l'icona */
 }
 
 .temperature {
-  display: flex;
-  align-items: baseline;
-  gap: 5px;
+  display: flex;                  /* Layout flexbox per temperatura e unità */
+  align-items: baseline;          /* Allinea sulla linea di base del testo */
+  gap: 5px;                      /* Piccolo spazio tra valore e unità */
 }
 
 .temp-value {
-  font-size: 4rem;
-  font-weight: 300;
-  color: #2c3e50;
-  line-height: 1;
+  font-size: 4rem;               /* Dimensione font molto grande per temperatura */
+  font-weight: 300;              /* Peso font leggero per eleganza */
+  color: #2c3e50;                /* Colore testo blu scuro */
+  line-height: 1;                /* Altezza linea normale */
 }
 
 .temp-unit {
-  font-size: 2rem;
-  color: #7f8c8d;
-  font-weight: 400;
+  font-size: 2rem;               /* Dimensione font grande per unità */
+  color: #7f8c8d;                /* Colore grigio per unità */
+  font-weight: 400;              /* Peso font normale */
 }
 
 .weather-info {
-  text-align: right;
+  text-align: right;             /* Allineamento testo a destra */
 }
 
 .weather-description {
-  font-size: 1.5rem;
-  color: #3498db;
-  font-weight: 500;
-  margin-bottom: 8px;
-  text-transform: capitalize;
+  font-size: 1.5rem;             /* Dimensione font media */
+  color: #3498db;                /* Colore blu per la descrizione */
+  font-weight: 500;              /* Peso font medio */
+  margin-bottom: 8px;            /* Spaziatura inferiore */
+  text-transform: capitalize;    /* Prima lettera maiuscola per ogni parola */
 }
 
 .feels-like {
-  color: #7f8c8d;
-  font-size: 1rem;
-  font-weight: 400;
+  color: #7f8c8d;                /* Colore grigio per testo secondario */
+  font-size: 1rem;               /* Dimensione font normale */
+  font-weight: 400;              /* Peso font normale */
 }
 
-/* Weather Details */
+/* 
+ * DETTAGLI METEO
+ * Griglia con 4 card per umidità, vento, pressione, visibilità
+ */
 .weather-details {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  background: white;
+  display: grid;                          /* Layout grid */
+  grid-template-columns: repeat(4, 1fr);  /* 4 colonne di uguale larghezza */
+  gap: 0;                                /* Nessuno spazio tra le colonne */
+  background: white;                     /* Sfondo bianco */
 }
 
 .detail-item {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 20px 25px;
-  border-right: 1px solid #ecf0f1;
-  background: white;
-  transition: background 0.3s;
+  display: flex;                         /* Layout flexbox per ogni item */
+  align-items: center;                   /* Allineamento verticale al centro */
+  gap: 15px;                            /* Spazio tra icona e testo */
+  padding: 20px 25px;                   /* Spaziatura interna */
+  border-right: 1px solid #ecf0f1;      /* Linea di separazione a destra */
+  background: white;                    /* Sfondo bianco */
+  transition: background 0.3s;          /* Transizione fluida per hover */
 }
 
 .detail-item:hover {
-  background: #f8f9fa;
+  background: #f8f9fa;                  /* Cambia sfondo al hover */
 }
 
 .detail-item:last-child {
-  border-right: none;
+  border-right: none;                   /* Rimuove bordo dall'ultimo elemento */
 }
 
 .detail-icon {
-  font-size: 1.5rem;
-  width: 40px;
-  text-align: center;
-  color: #3498db;
+  font-size: 1.5rem;                    /* Dimensione font grande per le emoji */
+  width: 40px;                         /* Larghezza fissa per allineamento */
+  text-align: center;                  /* Centra l'emoji */
+  color: #3498db;                      /* Colore blu per le icone */
 }
 
 .detail-text {
-  display: flex;
-  flex-direction: column;
+  display: flex;                       /* Layout flexbox per testo */
+  flex-direction: column;              /* Disposizione verticale */
 }
 
 .detail-label {
-  font-size: 0.8rem;
-  color: #7f8c8d;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
+  font-size: 0.8rem;                  /* Dimensione font piccola per etichette */
+  color: #7f8c8d;                     /* Colore grigio per testo secondario */
+  text-transform: uppercase;          /* Tutte maiuscole per le etichette */
+  font-weight: 600;                   /* Peso font semi-grassetto */
+  letter-spacing: 0.5px;              /* Spaziatura tra lettere per leggibilità */
+  margin-bottom: 4px;                 /* Piccola spaziatura inferiore */
 }
 
 .detail-value {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #2c3e50;
+  font-size: 1.1rem;                  /* Dimensione font media per i valori */
+  font-weight: 700;                   /* Peso font grassetto per enfasi */
+  color: #2c3e50;                     /* Colore blu scuro per i valori */
 }
 
-/* Button Details */
+/* 
+ * PULSANTE DETTAGLI COMPLETI
+ * Pulsante per navigare alla pagina dei dettagli
+ */
 .btn-details {
-  background: #34495e;
-  color: white;
-  width: 100%;
-  justify-content: center;
-  padding: 18px;
-  border-radius: 0;
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  transition: all 0.3s;
+  background: #34495e;                /* Colore blu scuro */
+  color: white;                       /* Testo bianco */
+  width: 100%;                        /* Larghezza piena */
+  justify-content: center;            /* Allineamento contenuto al centro */
+  padding: 18px;                      /* Spaziatura interna generosa */
+  border-radius: 0;                   /* Rimuove border-radius */
+  font-size: 1rem;                    /* Dimensione font standard */
+  font-weight: 600;                   /* Peso font semi-grassetto */
+  border: none;                       /* Rimuove bordo di default */
+  transition: all 0.3s;               /* Transizione fluida per tutti gli effetti */
 }
 
 .btn-details:hover {
-  background: #2c3e50;
+  background: #2c3e50;               /* Colore più scuro al hover */
 }
 
-/* Loading State */
+/* 
+ * STATO DI CARICAMENTO
+ * Visualizzato durante le chiamate API
+ */
 .loading-state {
-  padding: 60px 30px;
-  text-align: center;
-  background: white;
-  color: #7f8c8d;
+  padding: 60px 30px;                /* Spaziatura interna generosa */
+  text-align: center;                /* Allineamento testo al centro */
+  background: white;                 /* Sfondo bianco */
+  color: #7f8c8d;                    /* Colore grigio per testo */
 }
 
 .spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 0 auto 20px;
+  width: 50px;                       /* Larghezza dello spinner */
+  height: 50px;                      /* Altezza dello spinner */
+  border: 4px solid #f3f3f3;         /* Bordo grigio chiaro */
+  border-top: 4px solid #3498db;     /* Bordo superiore blu */
+  border-radius: 50%;                /* Forma circolare */
+  animation: spin 1s linear infinite; /* Animazione di rotazione continua */
+  margin: 0 auto 20px;               /* Centrato con margine inferiore */
 }
 
+/* 
+ * ANIMAZIONE SPINNER
+ * Definisce la rotazione dello spinner
+ */
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% { transform: rotate(0deg); }    /* Posizione iniziale */
+  100% { transform: rotate(360deg); } /* Rotazione completa */
 }
 
-/* Error State */
+/* 
+ * STATO DI ERRORE
+ * Visualizzato quando ci sono errori nelle chiamate API
+ */
 .error-state {
-  background: #fdf2f2;
-  color: #e74c3c;
-  padding: 20px 30px;
-  text-align: center;
-  border-left: 4px solid #e74c3c;
-  margin: 0;
+  background: #fdf2f2;               /* Sfondo rosso molto chiaro */
+  color: #e74c3c;                    /* Colore rosso per il testo */
+  padding: 20px 30px;                /* Spaziatura interna */
+  text-align: center;                /* Allineamento testo al centro */
+  border-left: 4px solid #e74c3c;    /* Bordo sinistro rosso per enfasi */
+  margin: 0;                         /* Rimuove margini */
 }
 
-/* Instructions */
+/* 
+ * ISTRUZIONI
+ * Visualizzato quando non ci sono dati meteo (stato iniziale)
+ */
 .instructions {
-  background: #f8f9fa;
-  padding: 30px;
-  border-radius: 0 0 20px 20px;
-  border-top: 1px solid #ecf0f1;
+  background: #f8f9fa;               /* Sfondo grigio chiaro */
+  padding: 30px;                     /* Spaziatura interna */
+  border-radius: 0 0 20px 20px;     /* Angoli arrotondati solo in basso */
+  border-top: 1px solid #ecf0f1;    /* Linea di separazione superiore */
 }
 
 .instructions h3 {
-  color: #2c3e50;
-  margin-bottom: 20px;
-  font-size: 1.3rem;
-  font-weight: 600;
+  color: #2c3e50;                    /* Colore testo blu scuro */
+  margin-bottom: 20px;               /* Spaziatura inferiore */
+  font-size: 1.3rem;                 /* Dimensione font media */
+  font-weight: 600;                  /* Peso font semi-grassetto */
 }
 
 .instructions ul {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
+  list-style: none;                  /* Rimuove i pallini di default */
+  display: grid;                     /* Layout grid per le istruzioni */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Griglia responsive */
+  gap: 15px;                        /* Spazio tra gli elementi */
 }
 
 .instructions li {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #5a6c7d;
-  font-size: 0.95rem;
-  padding: 8px 0;
+  display: flex;                     /* Layout flexbox per ogni item */
+  align-items: center;               /* Allineamento verticale al centro */
+  gap: 12px;                        /* Spazio tra emoji e testo */
+  color: #5a6c7d;                   /* Colore grigio-blu per il testo */
+  font-size: 0.95rem;               /* Dimensione font leggermente ridotta */
+  padding: 8px 0;                   /* Spaziatura verticale */
 }
 
 .instructions li::before {
-  content: "•";
-  color: #3498db;
-  font-weight: bold;
-  font-size: 1.2rem;
+  content: "•";                     /* Aggiunge un pallino personalizzato */
+  color: #3498db;                   /* Colore blu per il pallino */
+  font-weight: bold;                /* Grassetto */
+  font-size: 1.2rem;                /* Dimensione font grande */
 }
 
-/* Responsive */
+/* 
+ * MEDIA QUERIES PER RESPONSIVE DESIGN
+ * Adatta il layout per schermi più piccoli
+ */
+
+/* Tablet e schermi medi (max 768px) */
 @media (max-width: 768px) {
   .header {
-    padding: 30px 20px;
+    padding: 30px 20px;              /* Riduce la spaziatura */
   }
   
   .header h1 {
-    font-size: 2rem;
+    font-size: 2rem;                 /* Riduce dimensione font titolo */
   }
   
   .search-section {
-    padding: 20px;
+    padding: 20px;                   /* Riduce spaziatura */
   }
   
   .search-box {
-    flex-direction: column;
+    flex-direction: column;          /* Disposizione verticale */
   }
   
   .search-buttons {
-    width: 100%;
+    width: 100%;                     /* Larghezza piena per i pulsanti */
   }
   
   .weather-main {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 20px;
-    padding: 20px;
+    grid-template-columns: 1fr;      /* Singola colonna */
+    text-align: center;              /* Allineamento testo al centro */
+    gap: 20px;                      /* Riduce spazio tra elementi */
+    padding: 20px;                  /* Riduce spaziatura */
   }
   
   .temperature-section {
-    justify-content: center;
+    justify-content: center;         /* Centra icona e temperatura */
   }
   
   .weather-info {
-    text-align: center;
+    text-align: center;              /* Allinea testo al centro */
   }
   
   .temp-value {
-    font-size: 3rem;
+    font-size: 3rem;                /* Riduce dimensione temperatura */
   }
   
   .weather-details {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;  /* 2 colonne invece di 4 */
   }
   
   .weather-header {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-    padding: 20px;
+    flex-direction: column;          /* Disposizione verticale */
+    gap: 10px;                      /* Spazio tra elementi */
+    text-align: center;              /* Allineamento testo al centro */
+    padding: 20px;                  /* Riduce spaziatura */
   }
   
   .instructions ul {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr;      /* Singola colonna per le istruzioni */
   }
 }
 
+/* Smartphone (max 480px) */
 @media (max-width: 480px) {
   .weather-details {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr;      /* Singola colonna per i dettagli */
   }
   
   .detail-item {
-    border-right: none;
-    border-bottom: 1px solid #ecf0f1;
+    border-right: none;              /* Rimuove bordo destro */
+    border-bottom: 1px solid #ecf0f1; /* Aggiunge bordo inferiore */
   }
   
   .detail-item:last-child {
-    border-bottom: none;
+    border-bottom: none;             /* Rimuove bordo dall'ultimo elemento */
   }
   
   .home-container {
-    margin: 10px;
-    border-radius: 15px;
+    margin: 10px;                    /* Riduce margine esterno */
+    border-radius: 15px;             /* Riduce border-radius */
   }
 }

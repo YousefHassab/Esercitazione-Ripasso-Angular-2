@@ -1,37 +1,111 @@
+<!-- 
+ * DIRECTIVE @if - Controlla se weatherData esiste
+ * Mostra il contenuto solo se sono presenti dati meteo
+ * Questo evita errori quando i dati non sono ancora caricati
+ -->
 @if (weatherData) {
+  <!-- 
+   * CONTENITORE PRINCIPALE DELLA PAGINA DETTAGLI
+   * Wrapper che contiene tutti gli elementi della pagina
+   -->
   <div class="details-container">
+    
+    <!-- 
+     * HEADER DELLA PAGINA DETTAGLI
+     * Contiene il pulsante per tornare indietro e il titolo della pagina
+     -->
     <div class="details-header">
+      <!-- 
+       * PULSANTE BACK - Navigazione alla home page
+       * (click): Event binding che chiama il metodo goBack() al click
+       * class: Styling per il pulsante di ritorno
+       * ←: Simbolo freccia per indicare l'azione di tornare indietro
+       -->
       <button (click)="goBack()" class="back-btn">
         ← Torna alla Home
       </button>
+      
+      <!-- Titolo principale della pagina dettagli -->
       <h1>📊 Dettagli Meteo Completi</h1>
     </div>
 
+    <!-- 
+     * HEADER DELLA CITTA'
+     * Mostra il nome della città e la data/ora corrente
+     -->
     <div class="city-header">
+      <!-- 
+       * NOME CITTA' E PAESE
+       * {{ weatherData.name }}: Nome della città dall'API
+       * {{ weatherData.sys.country }}: Codice del paese dall'API
+       -->
       <h2>{{ weatherData.name }}, {{ weatherData.sys.country }}</h2>
+      
+      <!-- 
+       * DATA E ORA CORRENTE
+       * {{ today | date:'dd/MM/yyyy HH:mm' }}:
+       * - today: Getter che restituisce la data corrente
+       * - | date: Pipe Angular per formattare la data
+       * - 'dd/MM/yyyy HH:mm': Formato italiano (giorno/mese/anno ore:minuti)
+       -->
       <p class="current-time">{{ today | date:'dd/MM/yyyy HH:mm' }}</p>
     </div>
 
+    <!-- 
+     * GRIGLIA PRINCIPALE DEI DETTAGLI
+     * Layout a griglia che organizza le card informative
+     -->
     <div class="details-grid">
-      <!-- Temperatura -->
+      
+      <!-- 
+       * CARD TEMPERATURA
+       * Contiene tutte le informazioni relative alla temperatura
+       -->
       <div class="detail-card temperature-card">
+        <!-- Header della card con icona e titolo -->
         <div class="card-header">
-          <span class="card-icon">🌡️</span>
-          <h3>Temperatura</h3>
+          <span class="card-icon">🌡️</span>  <!-- Icona termometro -->
+          <h3>Temperatura</h3>                <!-- Titolo della sezione -->
         </div>
+        
+        <!-- 
+         * GRIGLIA TEMPERATURE
+         * Mostra i diversi valori di temperatura in una griglia 2x2
+         -->
         <div class="temperature-grid">
+          
+          <!-- 
+           * TEMPERATURA ATTUALE
+           * [style.color]: Property binding dinamico per il colore in base alla temperatura
+           * getTemperatureColor(): Metodo che restituisce un colore CSS in base al valore
+           -->
           <div class="temp-item current" [style.color]="getTemperatureColor(weatherData.main.temp)">
             <span class="temp-label">Attuale</span>
+            <!-- 
+             * VALORE TEMPERATURA ATTUALE
+             * {{ weatherData.main.temp | number:'1.1-1' }}°C:
+             * - weatherData.main.temp: Temperatura attuale dall'API
+             * - | number: Pipe per formattazione numerica
+             * - '1.1-1': 1 cifra intera, 1 decimale (min 1, max 1)
+             * - °C: Simbolo gradi Celsius
+             -->
             <span class="temp-value">{{ weatherData.main.temp | number:'1.1-1' }}°C</span>
           </div>
+          
+          <!-- TEMPERATURA PERCEPITA -->
           <div class="temp-item feels-like">
             <span class="temp-label">Percepita</span>
+            <!-- Stessa formattazione della temperatura attuale -->
             <span class="temp-value">{{ weatherData.main.feels_like | number:'1.1-1' }}°C</span>
           </div>
+          
+          <!-- TEMPERATURA MINIMA -->
           <div class="temp-item min-temp">
             <span class="temp-label">Minima</span>
             <span class="temp-value">{{ weatherData.main.temp_min | number:'1.1-1' }}°C</span>
           </div>
+          
+          <!-- TEMPERATURA MASSIMA -->
           <div class="temp-item max-temp">
             <span class="temp-label">Massima</span>
             <span class="temp-value">{{ weatherData.main.temp_max | number:'1.1-1' }}°C</span>
@@ -39,67 +113,116 @@
         </div>
       </div>
 
-      <!-- Condizioni -->
+      <!-- 
+       * CARD CONDIZIONI METEO
+       * Contiene icona e descrizione delle condizioni atmosferiche
+       -->
       <div class="detail-card conditions-card">
         <div class="card-header">
-          <span class="card-icon">🌤️</span>
+          <span class="card-icon">🌤️</span>  <!-- Icona meteo generica -->
           <h3>Condizioni</h3>
         </div>
+        
+        <!-- Contenuto della card condizioni -->
         <div class="conditions-content">
+          <!-- 
+           * ICONA METEO GRANDE
+           * [src]: Property binding per URL icona dinamica
+           * '@4x.png': Versione ad alta risoluzione (4x più grande)
+           * [alt]: Testo alternativo accessibile
+           -->
           <img 
             [src]="'https://openweathermap.org/img/wn/' + weatherData.weather[0].icon + '@4x.png'" 
             [alt]="weatherData.weather[0].description"
             class="weather-icon-large"
           >
+          
+          <!-- Testo descrittivo delle condizioni -->
           <div class="conditions-text">
+            <!-- 
+             * CONDIZIONE PRINCIPALE
+             * weatherData.weather[0].main: Categoria principale (es. "Rain", "Clouds")
+             -->
             <h4>{{ weatherData.weather[0].main }}</h4>
+            
+            <!-- 
+             * DESCRIZIONE DETTAGLIATA
+             * weatherData.weather[0].description: Descrizione estesa
+             * | titlecase: Pipe che mette in maiuscolo ogni parola
+             -->
             <p>{{ weatherData.weather[0].description | titlecase }}</p>
           </div>
         </div>
       </div>
 
-      <!-- Dettagli Atmosferici -->
+      <!-- 
+       * CARD DATI ATMOSFERICI
+       * Contiene umidità, pressione e visibilità
+       -->
       <div class="detail-card atmospheric-card">
         <div class="card-header">
-          <span class="card-icon">🌬️</span>
+          <span class="card-icon">🌬️</span>  <!-- Icona atmosfera/vento -->
           <h3>Atmosfera</h3>
         </div>
+        
+        <!-- Griglia per i dati atmosferici -->
         <div class="atmospheric-grid">
+          
+          <!-- ITEM UMIDITA' -->
           <div class="atmospheric-item">
-            <span class="atmospheric-icon">💧</span>
+            <span class="atmospheric-icon">💧</span>  <!-- Icona goccia -->
             <div class="atmospheric-text">
               <span class="atmospheric-label">Umidità</span>
+              <!-- Valore umidità in percentuale -->
               <span class="atmospheric-value">{{ weatherData.main.humidity }}%</span>
             </div>
           </div>
+          
+          <!-- ITEM PRESSIONE -->
           <div class="atmospheric-item">
-            <span class="atmospheric-icon">📊</span>
+            <span class="atmospheric-icon">📊</span>  <!-- Icona barometro -->
             <div class="atmospheric-text">
               <span class="atmospheric-label">Pressione</span>
+              <!-- Valore pressione in hPa -->
               <span class="atmospheric-value">{{ weatherData.main.pressure }} hPa</span>
             </div>
           </div>
+          
+          <!-- ITEM VISIBILITA' -->
           <div class="atmospheric-item">
-            <span class="atmospheric-icon">👁️</span>
+            <span class="atmospheric-icon">👁️</span>  <!-- Icona occhio -->
             <div class="atmospheric-text">
               <span class="atmospheric-label">Visibilità</span>
+              <!-- 
+               * VISIBILITA' CONVERTITA IN KM
+               * weatherData.visibility / 1000: Convertito da metri a chilometri
+               -->
               <span class="atmospheric-value">{{ weatherData.visibility / 1000 }} km</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Vento -->
+      <!-- 
+       * CARD VENTO
+       * Contiene informazioni sulla velocità del vento
+       -->
       <div class="detail-card wind-card">
         <div class="card-header">
-          <span class="card-icon">💨</span>
+          <span class="card-icon">💨</span>  <!-- Icona vento -->
           <h3>Vento</h3>
         </div>
+        
+        <!-- Contenuto card vento -->
         <div class="wind-content">
+          <!-- Valore velocità vento -->
           <div class="wind-speed">
+            <!-- Velocità del vento in m/s -->
             <span class="wind-value">{{ weatherData.wind.speed }}</span>
-            <span class="wind-unit">m/s</span>
+            <span class="wind-unit">m/s</span>  <!-- Unità di misura -->
           </div>
+          
+          <!-- Descrizione testuale -->
           <p class="wind-description">
             Velocità del vento attuale
           </p>
@@ -107,7 +230,15 @@
       </div>
     </div>
 
+    <!-- 
+     * SEZIONE AZIONI
+     * Contiene pulsanti aggiuntivi per l'utente
+     -->
     <div class="actions">
+      <!-- 
+       * PULSANTE SECONDARIO PER TORNARE INDIETRO
+       * Stesso funzionamento del pulsante in header ma con styling diverso
+       -->
       <button (click)="goBack()" class="btn btn-primary">
         ← Torna alla Ricerca
       </button>
