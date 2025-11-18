@@ -11,6 +11,7 @@
   box-shadow: 0 8px 32px rgba(0,0,0,0.1); /* Ombra leggera per effetto di profondità */
   overflow: hidden;                    /* Nasconde il contenuto che fuoriesce */
   border: 1px solid rgba(255,255,255,0.2); /* Bordo sottile semi-trasparente */
+  padding-top: 70px; /* aggiungi questa riga per spostare tutto verso il basso */
 }
 
 /* 
